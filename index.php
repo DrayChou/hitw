@@ -13,9 +13,6 @@ echo "<pre>";
 var_dump($_SESSION);
 echo "</pre>";
 
-session_id("HoleInW-h-zh-x-tk");
-session_start();
-
 $hitw = get_twitter_config(T_ID);
 echo "<pre>";
 var_dump($hitw);
