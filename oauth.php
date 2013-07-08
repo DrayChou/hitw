@@ -99,7 +99,11 @@ if( isset($_REQUEST['step']) && $_REQUEST['step'] == 0 ) {
 
 ?>
 
-<h3>请管理員先授权叔垃圾桶帐号</h3>
+<?php if( $twitter->screen_name == T_ID ) ?>
+<h3>垃圾桶帐号已完成授權</h3>
+<?php else: ?>
+<h3>请管理員先授权垃圾桶帐号</h3>
+<?php endif; ?>
 <div>
     <?php if (!empty($twitter)): ?>
         <h4>Twitter</h4>
