@@ -3,10 +3,15 @@ include 'config.php';
 include 'common.php';
 include 'twitteroauth/twitteroauth/twitteroauth.php';
 
-if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
+if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token'] ) {
+	echo "<pre>";
+	var_dump($_REQUEST);
+	var_dump($_SESSION);
+	echo "</pre>";
+	
   	session_destroy();
     echo "调用 twitter API 查询用户信息失败，请刷新页面重新验证，或者通知管理员<br/>";
-    echo '<a href="javascript:window.top.location.reload();" >返回</a>';
+    echo '<a href="/" >返回</a>';
     die();
 }
 
