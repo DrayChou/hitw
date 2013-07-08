@@ -3,7 +3,14 @@ include 'config.php';
 include 'common.php';
 include 'twitteroauth/twitteroauth/twitteroauth.php';
 
-if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
+if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
+  	session_destroy();
+    echo "调用 twitter API 查询用户信息失败，请刷新页面重新验证，或者通知管理员<br/>";
+    echo '<a href="javascript:window.top.location.reload();" >返回</a>';
+    die();
+}
+
+if ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
     // 数据合法，继续
 	echo "<pre>";
 	var_dump($_SESSION);
@@ -18,7 +25,7 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
 	echo "</pre>";
 
     // 获取 access token
-    $access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']);
+    $access_token = $twitteroauth->getAccessToken($_REQUEST['oauth_verifier']);
 
     echo "<pre>";
 	var_dump($access_token);
