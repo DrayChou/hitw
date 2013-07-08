@@ -1,7 +1,7 @@
 <?php
-include_once 'config.php';
-include_once 'common.php';
-include_once 'twitteroauth/twitteroauth/twitteroauth.php';
+include 'config.php';
+include 'common.php';
+include 'twitteroauth/twitteroauth/twitteroauth.php';
 
 session_id("HoleInW-h-zh-x-tk");
 session_start();
@@ -51,7 +51,7 @@ if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
                     <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
                     name:<?= $twitter->name ?><br/>
                     bio:<?= $twitter->description ?><br/>
-                    <p><a href='./index.php?=0'>退出登录</a></p>
+                    <p><a href='./index.php?step=0'>退出登录</a></p>
                 <?php else:?>
                     <a href='<?=$oauth_url?>'>twitter</a>
                 <?php endif; ?>
