@@ -36,8 +36,8 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 				<?php if(empty( $result )): ?>
 				<h4>說點什麼吧</h4>
                 <form method="post" action="/">
-                    <input type="text" name="content">
-                    <input type="submit">
+                    <input type="text" name="content"/>
+                    <input type="submit" value="我扔"/>
                 </form>
                 <?php else: ?>
                 <?php 
@@ -45,7 +45,7 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 				        $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
 				        echo "成功：<a href='/'>返回</a>&nbsp;<a target='_blank' href='{$href}'>查看</a><br/>\n\n";
 				    } else {
-				        echo "发布失败<br/>\n\n";
+				        echo "<a href='/'>返回</a>&nbsp;发布失败<br/>\n\n";
 				        echo "<pre>";
 						var_dump($result);
 						echo "</pre>";
