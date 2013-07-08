@@ -62,6 +62,9 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
 	    // Let's generate the URL and redirect
 	    $oauth_url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
 	} else {
+		echo "<pre>";
+		var_dump($twitteroauth);
+		echo "</pre>";
 	    // 发生错误，你可以做一些更友好的处理
 	    die('Something wrong happened.');
 	}
