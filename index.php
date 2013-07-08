@@ -1,5 +1,5 @@
 <?php
-include 'include/config.php';
+include 'config.php';
 include 'include/common.php';
 include 'include/twitteroauth/twitteroauth/twitteroauth.php';
 
