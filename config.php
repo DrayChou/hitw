@@ -14,5 +14,5 @@ define('T_ID','HoleInW');
 
 define('DEBUG', FALSE);
 
-session_id("HoleInW.h.zh-x.tk");
+session_id("HoleInW-h-zh-x-tk");
 session_start();
