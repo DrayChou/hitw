@@ -59,19 +59,19 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
         <div>
             <h2>無良大叔家的垃圾桶.</h2>
 
-			<?php if(empty( $hitw )): >
-			<h3>请管理員先授权叔垃圾桶帐号</h3>
-            <div>
-                <?php if (!empty($twitter)): ?>
-                    <h3>Twitter</h3>
-                    <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
-                    name:<?= $twitter->name ?><br/>
-                    bio:<?= $twitter->description ?><br/>
-                    <p><a href='./index.php?step=0'>退出登录</a></p>
-                <?php else:?>
-                    <a href='<?=$oauth_url?>'>twitter</a>
-                <?php endif; ?>
-            </div>
+			<?php if(empty( $hitw )): ?>
+				<h3>请管理員先授权叔垃圾桶帐号</h3>
+	            <div>
+	                <?php if (!empty($twitter)): ?>
+	                    <h3>Twitter</h3>
+	                    <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
+	                    name:<?= $twitter->name ?><br/>
+	                    bio:<?= $twitter->description ?><br/>
+	                    <p><a href='./index.php?step=0'>退出登录</a></p>
+	                <?php else:?>
+	                    <a href='<?=$oauth_url?>'>twitter</a>
+	                <?php endif; ?>
+	            </div>
 			<?php else:?>
 				<h4>說點什麼吧</h4>
                 <form method="post" action="/">
