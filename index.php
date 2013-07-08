@@ -6,7 +6,7 @@ include_once 'twitteroauth/twitteroauth/twitteroauth.php';
 session_id("HoleInW-h-zh-x-tk");
 session_start();
 
-if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token'] ) {
+if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_REQUEST['oauth_token'] ) {
 	echo "<pre>";
 	var_dump($_REQUEST);
 	var_dump($_SESSION);
@@ -17,13 +17,13 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
     echo '<a href="/" >返回</a>';
     die();
     
-} elseif ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
+} elseif ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['twitter_oauth_token']) && !empty($_SESSION['twitter_oauth_token_secret']) ) {
     // 数据合法，继续
 	echo "<pre>";
 	var_dump($_SESSION);
 	echo "</pre>";
     
-    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
+    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['twitter_oauth_token'], $_SESSION['twitter_oauth_token_secret']);
 
 	echo "<pre>";
 	var_dump($twitteroauth);
@@ -40,8 +40,8 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
     $_SESSION['access_token'] = $access_token;
     $_SESSION['user_id'] = $access_token["user_id"];
     $_SESSION['screen_name'] = $access_token["screen_name"];
-    unset($_SESSION['oauth_token']);
-    unset($_SESSION['oauth_token_secret']);
+    unset($_SESSION['twitter_oauth_token']);
+    unset($_SESSION['twitter_oauth_token_secret']);
 
     set_twitter_config($_SESSION);
 
@@ -80,8 +80,8 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
 	echo "</pre>";
 
 	// 保存到 session 中
-	$_SESSION['oauth_token'] = $request_token['oauth_token'];
-	$_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+	$_SESSION['twitter_oauth_token'] = $request_token['oauth_token'];
+	$_SESSION['twitter_oauth_token_secret'] = $request_token['oauth_token_secret'];
 
 	echo "<pre>";
 	var_dump($_SESSION);
@@ -106,7 +106,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <title>无良大叔家的叔树洞.</title>
+        <title>無良大叔家的垃圾桶.</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <style type="text/css">
             img {border-width: 0}
@@ -115,7 +115,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
     </head>
     <body style="background-image: <?= $twitter->profile_background_image_url ?>;">
         <div>
-            <h2>无良大叔家的叔树洞.</h2>
+            <h2>無良大叔家的垃圾桶.</h2>
 
             <div>
                 <?php if (!empty($twitter)): ?>
@@ -136,7 +136,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
 				    if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
 				        $say = mysql_escape_string($_POST['dn']);
 				        
-				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
+				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['twitter_oauth_token'], $hitw['access_token']['twitter_oauth_token_secret']);
 				        
 				        $result = $twitteroauth->post('statuses/update', array('status' => $value["content"]));
 				        if (!empty($result->id_str)) {
@@ -151,7 +151,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
 	                }
 				?>
                 <?php if (empty($hitw)): ?>
-                    <h3>请先授权叔树洞帐号</h3>
+                    <h3>请管理員先授权叔垃圾桶帐号</h3>
                 <?php else:?>
                     <h4></h4>
                     <form method="post" action="index.php?setp=1">
