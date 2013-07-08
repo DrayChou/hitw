@@ -19,22 +19,22 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_R
     
 } elseif ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['twitter_oauth_token']) && !empty($_SESSION['twitter_oauth_token_secret']) ) {
     // 数据合法，继续
-	echo "<pre>";
-	var_dump($_SESSION);
-	echo "</pre>";
+	//echo "<pre>";
+	//var_dump($_SESSION);
+	//echo "</pre>";
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['twitter_oauth_token'], $_SESSION['twitter_oauth_token_secret']);
 
-	echo "<pre>";
-	var_dump($twitteroauth);
-	echo "</pre>";
+	//echo "<pre>";
+	//var_dump($twitteroauth);
+	//echo "</pre>";
 
     // 获取 access token
     $access_token = $twitteroauth->getAccessToken($_REQUEST['oauth_verifier']);
 
-    echo "<pre>";
-	var_dump($access_token);
-	echo "</pre>";
+ //   echo "<pre>";
+	//var_dump($access_token);
+	//echo "</pre>";
     
     // 将获取到的 access token 保存到 Session 中
     $_SESSION['access_token'] = $access_token;
@@ -45,20 +45,21 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_R
 
     set_twitter_config($_SESSION);
 
-    echo "<pre>";
-	var_dump($_SESSION);
-	echo "</pre>";
+ //   echo "<pre>";
+	//var_dump($_SESSION);
+	//echo "</pre>";
     //header('Location: /index.php');
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
     
     $result = $twitteroauth->get('users/lookup', array('screen_name' => $access_token["screen_name"]));
 
-    echo "<pre>";
-	var_dump($result);
-	echo "</pre>";
-
     if(!isset($result[0])){
+		echo "<pre>";
+		var_dump($_SESSION);
+		var_dump($result);
+		echo "</pre>";
+	    
         session_destroy();
         echo "调用 twitter API 查询用户信息失败，请刷新页面重新验证，或者通知管理员<br/>";
         echo '<a href="javascript:window.top.location.reload();" >返回</a>';
@@ -75,26 +76,26 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_R
 
 	// Requesting authentication tokens, the parameter is the URL we will be redirected to
 	$request_token = $twitteroauth->getRequestToken(OAUTH_CALLBACK);
-	echo "<pre>";
-	var_dump($request_token);
-	echo "</pre>";
+	//echo "<pre>";
+	//var_dump($request_token);
+	//echo "</pre>";
 
 	// 保存到 session 中
 	$_SESSION['twitter_oauth_token'] = $request_token['oauth_token'];
 	$_SESSION['twitter_oauth_token_secret'] = $request_token['oauth_token_secret'];
 
-	echo "<pre>";
-	var_dump($_SESSION);
-	echo "</pre>";
+	//echo "<pre>";
+	//var_dump($_SESSION);
+	//echo "</pre>";
 
 	// 如果没有错误发生
 	if ($twitteroauth->http_code == 200) {
 	    // Let's generate the URL and redirect
 	    $oauth_url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
 	} else {
-		echo "<pre>";
-		var_dump($twitteroauth);
-		echo "</pre>";
+		//echo "<pre>";
+		//var_dump($twitteroauth);
+		//echo "</pre>";
 	    // 发生错误，你可以做一些更友好的处理
 	    die('Something wrong happened.');
 	}
@@ -134,7 +135,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_R
 				<?php
 				    $hitw = get_twitter_config(T_ID);
 				    if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
-				        $say = mysql_escape_string($_POST['dn']);
+				        $value["content"] = mysql_escape_string($_POST['dn']);
 				        
 				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['twitter_oauth_token'], $hitw['access_token']['twitter_oauth_token_secret']);
 				        
