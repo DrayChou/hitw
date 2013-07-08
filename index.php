@@ -59,12 +59,15 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
     // 创建 TwitterOAuth 对象实例
 	$twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 	$twitteroauth->host = "https://api.twitter.com/1.1/";
-	#$twitteroauth->ssl_verifypeer = TRUE;
+	//$twitteroauth->ssl_verifypeer = TRUE;
 
     //var_dump($twitteroauth);die();
 
 	// Requesting authentication tokens, the parameter is the URL we will be redirected to
 	$request_token = $twitteroauth->getRequestToken(OAUTH_CALLBACK);
+	echo "<pre>";
+	var_dump($request_token);
+	echo "</pre>";
 
 	// 保存到 session 中
 	$_SESSION['oauth_token'] = $request_token['oauth_token'];
