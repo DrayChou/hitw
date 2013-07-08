@@ -7,20 +7,29 @@ session_id("HoleInW-h-zh-x-tk");
 session_start();
 
 $hitw = get_twitter_config(T_ID);
+echo "<pre>";
+var_dump($hitw);
+echo "</pre>";
 
-if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
-    $value["content"] = ($_POST['dn']);
+if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
+    $content = substr($_POST['content'], 0, 140);
+    echo "<pre>";
+	var_dump($content);
+	echo "</pre>";
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
+    echo "<pre>";
+	var_dump($twitteroauth);
+	echo "</pre>";
     
-    $result = $twitteroauth->post('statuses/update', array('status' => $value["content"]));
+    $result = $twitteroauth->post('statuses/update', array('status' => $content));
+    echo "<pre>";
+	var_dump($result);
+	echo "</pre>";
     if (!empty($result->id_str)) {
         $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
         echo "成功：<a target='_blank' href='{$href}'>地址</a><br/>\n\n";
-                
-        $value["twitter_href"] = $href;
     } else {
-        set_douban_error_log($douban_id, array("douban" => $value, "result" => $result));
         echo "发布失败<br/>\n\n";
 	}
 }else{
@@ -59,7 +68,7 @@ if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
 			<?php else:?>
 				<h4>說點什麼吧</h4>
                 <form method="post" action="/">
-                    <input type="text" name="dn">
+                    <input type="text" name="content">
                     <input type="submit">
                 </form>
 			<?php endif;>
