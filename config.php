@@ -14,4 +14,4 @@ define('T_ID','HoleInW');
 
 define('DEBUG', FALSE);
 
-session_start();
+//session_start();

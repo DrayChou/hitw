@@ -5,6 +5,10 @@ include 'twitteroauth/twitteroauth/twitteroauth.php';
 
 if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
     // 数据合法，继续
+	echo "<pre>";
+	var_dump($_SESSION);
+	echo "</pre>";
+    
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
     $twitteroauth->host = "https://api.twitter.com/1.1/";
 	//$twitteroauth->ssl_verifypeer = TRUE;
@@ -72,6 +76,10 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
 	// 保存到 session 中
 	$_SESSION['oauth_token'] = $request_token['oauth_token'];
 	$_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+
+	echo "<pre>";
+	var_dump($_SESSION);
+	echo "</pre>";
 
 	// 如果没有错误发生
 	if ($twitteroauth->http_code == 200) {
