@@ -135,7 +135,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_R
 				<?php
 				    $hitw = get_twitter_config(T_ID);
 				    if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
-				        $value["content"] = mysql_escape_string($_POST['dn']);
+				        $value["content"] = ($_POST['dn']);
 				        
 				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['twitter_oauth_token'], $hitw['access_token']['twitter_oauth_token_secret']);
 				        
