@@ -4,38 +4,13 @@ include 'config.php';
 include 'common.php';
 include 'twitteroauth/twitteroauth/twitteroauth.php';
 
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
-
 $hitw = get_twitter_config(T_ID);
-echo "<pre>";
-var_dump($hitw);
-echo "</pre>";
-
 if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
     $content = substr($_POST['content'], 0, 140);
-    echo "<pre>";
-	var_dump($content);
-	echo "</pre>";
-    
+
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
-    echo "<pre>";
-	var_dump($twitteroauth);
-	echo "</pre>";
     
     $result = $twitteroauth->post('statuses/update', array('status' => $content));
-    echo "<pre>";
-	var_dump($result);
-	echo "</pre>";
-    if (!empty($result->id_str)) {
-        $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
-        echo "成功：<a target='_blank' href='{$href}'>地址</a><br/>\n\n";
-    } else {
-        echo "发布失败<br/>\n\n";
-	}
-}else{
-    include('oauth.php');
 }
 ?>
 
@@ -56,24 +31,27 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 
 			<div>
 			<?php if(empty( $hitw )): ?>
-				<h3>请管理員先授权叔垃圾桶帐号</h3>
-	            <div>
-	                <?php if (!empty($twitter)): ?>
-	                    <h4>Twitter</h4>
-	                    <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
-	                    name:<?= $twitter->name ?><br/>
-	                    bio:<?= $twitter->description ?><br/>
-	                    <p><a href='./index.php?step=0'>退出登录</a></p>
-	                <?php else:?>
-	                    <a href='<?=$oauth_url?>'>twitter</a>
-	                <?php endif; ?>
-	            </div>
+				<?php include('oauth.php'); ?>
 			<?php else: ?>
+				<?php if(empty( $result )): ?>
 				<h4>說點什麼吧</h4>
                 <form method="post" action="/">
                     <input type="text" name="content">
                     <input type="submit">
                 </form>
+                <?php else: ?>
+                <?php 
+					if (!empty($result->id_str)) {
+				        $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
+				        echo "成功：<a target='_blank' href='{$href}'>地址</a><br/>\n\n";
+				    } else {
+				        echo "发布失败<br/>\n\n";
+				        echo "<pre>";
+						var_dump($result);
+						echo "</pre>";
+					}
+                ?>
+                <?php endif;?>
 			<?php endif;?>
 			</div>
 		</div>

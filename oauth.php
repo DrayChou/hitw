@@ -98,3 +98,16 @@ if( $_REQUEST['step'] == 0 ) {
 }
 
 ?>
+
+<h3>请管理員先授权叔垃圾桶帐号</h3>
+<div>
+    <?php if (!empty($twitter)): ?>
+        <h4>Twitter</h4>
+        <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
+        name:<?= $twitter->name ?><br/>
+        bio:<?= $twitter->description ?><br/>
+        <p><a href='./index.php?step=0'>退出登录</a></p>
+    <?php else:?>
+        <a href='<?=$oauth_url?>'>twitter</a>
+    <?php endif; ?>
+</div>
