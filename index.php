@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
-include 'include/common.php';
-include 'include/twitteroauth/twitteroauth/twitteroauth.php';
+include 'common.php';
+include 'twitteroauth/twitteroauth/twitteroauth.php';
 
 if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
     // 数据合法，继续
