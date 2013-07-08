@@ -43,7 +43,7 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
                 <?php 
 					if (!empty($result->id_str)) {
 				        $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
-				        echo "成功：<a target='_blank' href='{$href}'>地址</a><br/>\n\n";
+				        echo "成功：<a href='/'>返回</a>&nbsp;<a target='_blank' href='{$href}'>查看</a><br/>\n\n";
 				    } else {
 				        echo "发布失败<br/>\n\n";
 				        echo "<pre>";
