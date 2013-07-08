@@ -1,5 +1,7 @@
 <?php
-include dirname(dirname(__FILE__)).'/init.php';
+include 'include/config.php';
+include 'include/common.php';
+include 'include/twitteroauth/twitteroauth/twitteroauth.php';
 
 if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
     // 数据合法，继续
@@ -96,26 +98,26 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
 
             <div>
 
-<?php
-    $hitw = get_twitter_config(HoleInTW);
-    if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
-        $say = mysql_escape_string($_POST['dn']);
-        
-        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
-        $twitteroauth->host = "https://api.twitter.com/1.1/";
-        
-        $result = $twitteroauth->post('statuses/update', array('status' => $value["content"]));
-        if (!empty($result->id_str)) {
-            $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
-            echo "成功：<a target='_blank' href='{$href}'>地址</a><br/>\n\n";
-                    
-            $value["twitter_href"] = $href;
-        } else {
-            set_douban_error_log($douban_id, array("douban" => $value, "result" => $result));
-            echo "发布失败<br/>\n\n";
-                                    continue;
-                }
-?>
+				<?php
+				    $hitw = get_twitter_config(HoleInTW);
+				    if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
+				        $say = mysql_escape_string($_POST['dn']);
+				        
+				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
+				        $twitteroauth->host = "https://api.twitter.com/1.1/";
+				        
+				        $result = $twitteroauth->post('statuses/update', array('status' => $value["content"]));
+				        if (!empty($result->id_str)) {
+				            $href = "https://twitter.com/#!/{$result->user->screen_name}/status/{$result->id_str}";
+				            echo "成功：<a target='_blank' href='{$href}'>地址</a><br/>\n\n";
+				                    
+				            $value["twitter_href"] = $href;
+				        } else {
+				            set_douban_error_log($douban_id, array("douban" => $value, "result" => $result));
+				            echo "发布失败<br/>\n\n";
+						}
+	                }
+				?>
                 <?php if (empty($hitw)): ?>
                     <h3>请先授权叔树洞帐号</h3>
                 <?php else:?>
