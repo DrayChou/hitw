@@ -51,14 +51,14 @@ if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
                     <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
                     name:<?= $twitter->name ?><br/>
                     bio:<?= $twitter->description ?><br/>
-                    <p><a href='./index.php?setp=0'>退出登录</a></p>
+                    <p><a href='./index.php?=0'>退出登录</a></p>
                 <?php else:?>
                     <a href='<?=$oauth_url?>'>twitter</a>
                 <?php endif; ?>
             </div>
 			<?php else:?>
 				<h4>說點什麼吧</h4>
-                <form method="post" action="index.php?setp=1">
+                <form method="post" action="/">
                     <input type="text" name="dn">
                     <input type="submit">
                 </form>

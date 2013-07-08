@@ -1,6 +1,8 @@
 <?php
 
-if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_REQUEST['oauth_token'] ) {
+if( $_REQUEST['setp'] == 0 ) {
+	session_destroy();
+} elseif ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_REQUEST['oauth_token'] ) {
 	echo "<pre>";
 	var_dump($_REQUEST);
 	var_dump($_SESSION);
@@ -94,17 +96,3 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_R
 	    die('Something wrong happened.');
 	}
 }
-
-?>
-
-<div>
-    <?php if (!empty($twitter)): ?>
-        <h3>Twitter</h3>
-        <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
-        name:<?= $twitter->name ?><br/>
-        bio:<?= $twitter->description ?><br/>
-        <p><a href='./index.php?setp=0'>退出登录</a></p>
-    <?php else:?>
-        <a href='<?=$oauth_url?>'>twitter</a>
-    <?php endif; ?>
-</div>
