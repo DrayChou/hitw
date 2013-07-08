@@ -47,3 +47,4 @@ function set_debug_log($log_id, $str) {
     fclose($fh);
     return $result;
 }
+?>

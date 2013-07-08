@@ -16,7 +16,4 @@ define('DEBUG', FALSE);
 session_id("HoleInW-h-zh-x-tk");
 session_start();
 
-echo "<pre>";
-var_dump($_SERVER);
-echo "</pre>";
-die();
+?>

@@ -1,10 +1,5 @@
 <?php
 
-echo "<pre>";
-var_dump($_SERVER);
-echo "</pre>";
-die();
-
 include 'config.php';
 include 'common.php';
 include 'twitteroauth/twitteroauth/twitteroauth.php';
@@ -59,11 +54,12 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
         <div>
             <h2>無良大叔家的垃圾桶.</h2>
 
+			<div>
 			<?php if(empty( $hitw )): ?>
 				<h3>请管理員先授权叔垃圾桶帐号</h3>
 	            <div>
 	                <?php if (!empty($twitter)): ?>
-	                    <h3>Twitter</h3>
+	                    <h4>Twitter</h4>
 	                    <img src="<?= $twitter->profile_image_url_https ?>" title="<?= $twitter->name ?>"/><br/>
 	                    name:<?= $twitter->name ?><br/>
 	                    bio:<?= $twitter->description ?><br/>
@@ -72,13 +68,15 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 	                    <a href='<?=$oauth_url?>'>twitter</a>
 	                <?php endif; ?>
 	            </div>
-			<?php else:?>
+			<?php else: ?>
 				<h4>說點什麼吧</h4>
                 <form method="post" action="/">
                     <input type="text" name="content">
                     <input type="submit">
                 </form>
-			<?php endif;>
+			<?php endif;?>
+			</div>
+		</div>
     </body>
 </html>
 

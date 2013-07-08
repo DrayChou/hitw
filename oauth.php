@@ -96,3 +96,5 @@ if( $_REQUEST['step'] == 0 ) {
 	    die('Something wrong happened.');
 	}
 }
+
+?>
