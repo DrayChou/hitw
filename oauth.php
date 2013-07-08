@@ -1,6 +1,6 @@
 <?php
 
-if( $_REQUEST['step'] == 0 ) {
+if( isset($_REQUEST['step']) && $_REQUEST['step'] == 0 ) {
 	session_destroy();
 } elseif ( isset($_REQUEST['oauth_token']) && $_SESSION['twitter_oauth_token'] !== $_REQUEST['oauth_token'] ) {
 	echo "<pre>";
