@@ -1,7 +1,10 @@
 <?php
-include 'config.php';
-include 'common.php';
-include 'twitteroauth/twitteroauth/twitteroauth.php';
+include_once 'config.php';
+include_once 'common.php';
+include_once 'twitteroauth/twitteroauth/twitteroauth.php';
+
+session_id("HoleInW-h-zh-x-tk");
+session_start();
 
 if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token'] ) {
 	echo "<pre>";
@@ -21,8 +24,6 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
 	echo "</pre>";
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
-    //$twitteroauth->host = "https://api.twitter.com/1.1/";
-	//$twitteroauth->ssl_verifypeer = TRUE;
 
 	echo "<pre>";
 	var_dump($twitteroauth);
@@ -50,8 +51,6 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
     //header('Location: /index.php');
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-    //$twitteroauth->host = "https://api.twitter.com/1.1/";
-    //$twitteroauth->ssl_verifypeer = TRUE;
     
     $result = $twitteroauth->get('users/lookup', array('screen_name' => $access_token["screen_name"]));
 
@@ -73,10 +72,6 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
 
     // 创建 TwitterOAuth 对象实例
 	$twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
-	//$twitteroauth->host = "https://api.twitter.com/1.1/";
-	//$twitteroauth->ssl_verifypeer = TRUE;
-
-    //var_dump($twitteroauth);die();
 
 	// Requesting authentication tokens, the parameter is the URL we will be redirected to
 	$request_token = $twitteroauth->getRequestToken(OAUTH_CALLBACK);
@@ -142,7 +137,6 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
 				        $say = mysql_escape_string($_POST['dn']);
 				        
 				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
-				        //$twitteroauth->host = "https://api.twitter.com/1.1/";
 				        
 				        $result = $twitteroauth->post('statuses/update', array('status' => $value["content"]));
 				        if (!empty($result->id_str)) {
