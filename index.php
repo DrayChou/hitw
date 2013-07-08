@@ -13,9 +13,7 @@ if ( isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['
     echo "调用 twitter API 查询用户信息失败，请刷新页面重新验证，或者通知管理员<br/>";
     echo '<a href="/" >返回</a>';
     die();
-}
-
-if ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
+} elseif ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret']) ) {
     // 数据合法，继续
 	echo "<pre>";
 	var_dump($_SESSION);
