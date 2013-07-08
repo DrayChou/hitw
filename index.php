@@ -102,7 +102,7 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
             <div>
 
 				<?php
-				    $hitw = get_twitter_config(HoleInTW);
+				    $hitw = get_twitter_config(T_ID);
 				    if( !empty( $hitw ) && !empty( $_POST['dn'] ) ){
 				        $say = mysql_escape_string($_POST['dn']);
 				        
