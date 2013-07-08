@@ -7,10 +7,18 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
     // 数据合法，继续
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
     $twitteroauth->host = "https://api.twitter.com/1.1/";
-	#$twitteroauth->ssl_verifypeer = TRUE;
+	//$twitteroauth->ssl_verifypeer = TRUE;
+
+	echo "<pre>";
+	var_dump($twitteroauth);
+	echo "</pre>";
 
     // 获取 access token
     $access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']);
+
+    echo "<pre>";
+	var_dump($access_token);
+	echo "</pre>";
     
     // 将获取到的 access token 保存到 Session 中
     $_SESSION['access_token'] = $access_token;
@@ -20,16 +28,21 @@ if ( !empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !emp
     unset($_SESSION['oauth_token_secret']);
 
     set_twitter_config($_SESSION);
+
+    echo "<pre>";
+	var_dump($_SESSION);
+	echo "</pre>";
     //header('Location: /index.php');
     
-    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['access_token']['oauth_token'], $_SESSION['access_token']['oauth_token_secret']);
+    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
     $twitteroauth->host = "https://api.twitter.com/1.1/";
     #$twitteroauth->ssl_verifypeer = TRUE;
     
-    $result = $twitteroauth->get('users/lookup', array('screen_name' => $username));
-    if(DEBUG){
-        set_douban_debug_log($_SESSION);
-    }
+    $result = $twitteroauth->get('users/lookup', array('screen_name' => $access_token["screen_name"]));
+
+    echo "<pre>";
+	var_dump($result);
+	echo "</pre>";
 
     if(!isset($result[0])){
         session_destroy();
