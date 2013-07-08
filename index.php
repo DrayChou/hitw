@@ -22,7 +22,7 @@ if ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !
 	echo "</pre>";
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
-    $twitteroauth->host = "https://api.twitter.com/1.1/";
+    //$twitteroauth->host = "https://api.twitter.com/1.1/";
 	//$twitteroauth->ssl_verifypeer = TRUE;
 
 	echo "<pre>";
@@ -51,8 +51,8 @@ if ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !
     //header('Location: /index.php');
     
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-    $twitteroauth->host = "https://api.twitter.com/1.1/";
-    #$twitteroauth->ssl_verifypeer = TRUE;
+    //$twitteroauth->host = "https://api.twitter.com/1.1/";
+    //$twitteroauth->ssl_verifypeer = TRUE;
     
     $result = $twitteroauth->get('users/lookup', array('screen_name' => $access_token["screen_name"]));
 
@@ -74,7 +74,7 @@ if ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !
 
     // 创建 TwitterOAuth 对象实例
 	$twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
-	$twitteroauth->host = "https://api.twitter.com/1.1/";
+	//$twitteroauth->host = "https://api.twitter.com/1.1/";
 	//$twitteroauth->ssl_verifypeer = TRUE;
 
     //var_dump($twitteroauth);die();
@@ -143,7 +143,7 @@ if ( isset($_REQUEST['oauth_token']) && !empty($_REQUEST['oauth_verifier']) && !
 				        $say = mysql_escape_string($_POST['dn']);
 				        
 				        $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
-				        $twitteroauth->host = "https://api.twitter.com/1.1/";
+				        //$twitteroauth->host = "https://api.twitter.com/1.1/";
 				        
 				        $result = $twitteroauth->post('statuses/update', array('status' => $value["content"]));
 				        if (!empty($result->id_str)) {
