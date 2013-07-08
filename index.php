@@ -3,6 +3,10 @@ include 'config.php';
 include 'common.php';
 include 'twitteroauth/twitteroauth/twitteroauth.php';
 
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
+
 session_id("HoleInW-h-zh-x-tk");
 session_start();
 
