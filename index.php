@@ -8,15 +8,19 @@ $hitw = get_twitter_config(T_ID);
 if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
     $content = substr($_POST['content'], 0, 140);
 
-    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
+    if (preg_match("/@/i", $content)) {
+	   $result = "不可以@别人哦~"
+	} else {
+	    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
 
-    $result = $twitteroauth->get('users/lookup', array('screen_name' => $hitw['access_token']["screen_name"]));
-    if( isset($result[0]) && ( empty($hitw['twitter']) || $hitw['twitter'] !== $result[0] ) ){
-	    $hitw['twitter'] = @$result[0];
-	    set_twitter_config($hitw);
-    }
-    
-    $result = $twitteroauth->post('statuses/update', array('status' => $content));
+	    $result = $twitteroauth->get('users/lookup', array('screen_name' => $hitw['access_token']["screen_name"]));
+	    if( isset($result[0]) && ( empty($hitw['twitter']) || $hitw['twitter'] !== $result[0] ) ){
+		    $hitw['twitter'] = @$result[0];
+		    set_twitter_config($hitw);
+	    }
+	    
+	    $result = $twitteroauth->post('statuses/update', array('status' => $content));
+	}
 }
 ?>
 
