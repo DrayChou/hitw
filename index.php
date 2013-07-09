@@ -5,7 +5,7 @@ include 'common.php';
 include 'twitteroauth/twitteroauth/twitteroauth.php';
 
 $hitw = get_twitter_config(T_ID);
-if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
+if( isset($_SESSION['start']) && !empty( $hitw ) && !empty( $_POST['content'] ) ){
     $content = mb_substr($_POST['content'], 0, 139);
 
     if ( preg_match("/@/i", $content) ) {
@@ -21,6 +21,10 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 	    
 	    $result = $twitteroauth->post('statuses/update', array('status' => $content));
 	}
+
+	unset($_SESSION['start']);
+} else {
+	$_SESSION['start'] = 1;
 }
 ?>
 
