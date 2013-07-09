@@ -6,7 +6,7 @@ include 'twitteroauth/twitteroauth/twitteroauth.php';
 
 $hitw = get_twitter_config(T_ID);
 if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
-    $content = substr($_POST['content'], 0, 140);
+    $content = mb_substr($_POST['content'], 0, 139);
 
     if ( preg_match("/@/i", $content) ) {
 	   $result = "不可以@别人哦~";
