@@ -72,6 +72,11 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
                 <?php endif;?>
 			<?php endif;?>
 			</div>
+			<!--<div>
+				<span>
+					Fork me on <a href="https://github.com/DrayChou/hitw">github</>
+				</span>
+			</div>-->
 		</div>
     </body>
 </html>
