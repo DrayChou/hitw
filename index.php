@@ -9,6 +9,9 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
     $content = substr($_POST['content'], 0, 140);
 
     $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
+
+    $result = $twitteroauth->get('users/lookup', array('screen_name' => $access_token["screen_name"]));
+    $twitter = @$result[0];
     
     $result = $twitteroauth->post('statuses/update', array('status' => $content));
 }
@@ -25,7 +28,7 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
             * {font-family:'Lucida Grande', sans-serif;}
         </style>
     </head>
-    <body style="background-image: <?= $twitter->profile_background_image_url ?>;">
+    <body style="background-image: <?= empty($twitter)?'':$twitter->profile_background_image_url ?>;">
         <div>
             <h2>無良大叔家的垃圾桶.</h2>
 
