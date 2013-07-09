@@ -8,8 +8,8 @@ $hitw = get_twitter_config(T_ID);
 if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
     $content = substr($_POST['content'], 0, 140);
 
-    if (preg_match("/@/i", $content)) {
-	   $result = "不可以@别人哦~"
+    if ( preg_match("/@/i", $content) ) {
+	   $result = "不可以@别人哦~";
 	} else {
 	    $twitteroauth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $hitw['access_token']['oauth_token'], $hitw['access_token']['oauth_token_secret']);
 
