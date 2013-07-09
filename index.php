@@ -59,9 +59,14 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 				    } else {
 				        echo "<a href='/'>返回</a>&nbsp;发布失败<br/>\n\n";
 				        if( is_object($result) ) {
-					        var_dump($result);
+					        if( is_array($result->errors) ){
+						        foreach( $result->errors as $key => $value ) {
+						        	echo "<p>",$value->message,"</p>";
+						        }
+					        }
+				        }else{
+					        echo "<p>",$result,"</p>";
 				        }
-				        echo "<p>",$result,"</p>";
 					}
                 ?>
                 <?php endif;?>
