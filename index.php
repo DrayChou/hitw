@@ -36,18 +36,20 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
         </style>
     </head>
     <body style="background-color: powderblue;">
-        <div class="body">
-            <h2>無良大叔家的垃圾桶.</h2>
+        <div style="text-align: center; margin: 160px auto auto;">
+            <h1>無良大叔家的垃圾桶.</h1>
 
-			<div style="text-align: center; margin: 160px auto auto;">
+			<div>
 			<?php if(empty( $hitw )): ?>
 				<?php include('oauth.php'); ?>
 			<?php else: ?>
 				<?php if(empty( $result )): ?>
-				<h4>說點什麼吧</h4>
+				<h2>說點什麼吧</h2>
                 <form method="post" action="/">
                     <textarea name="content" style="width: 400px; height: 100px;"></textarea>
-                    <input type="submit" style="font-size: 50px;" value="我丢">
+                    <p>
+                    	<input type="submit" style="font-size: 50px;" value="我丢">
+                    </p>
                 </form>
                 <?php else: ?>
                 <?php 
