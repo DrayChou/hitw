@@ -35,19 +35,19 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
             * {font-family:'Lucida Grande', sans-serif;}
         </style>
     </head>
-    <body style="background-image: <?= empty($hitw['twitter'])?'':$hitw['twitter']->profile_background_image_url ?>;">
-        <div>
+    <body style="background-color: powderblue;">
+        <div class="body">
             <h2>無良大叔家的垃圾桶.</h2>
 
-			<div>
+			<div style="text-align: center; margin: 160px auto auto;">
 			<?php if(empty( $hitw )): ?>
 				<?php include('oauth.php'); ?>
 			<?php else: ?>
 				<?php if(empty( $result )): ?>
 				<h4>說點什麼吧</h4>
                 <form method="post" action="/">
-                    <input type="text" name="content"/>
-                    <input type="submit" value="我扔"/>
+                    <textarea name="content" style="width: 400px; height: 100px;"></textarea>
+                    <input type="submit" style="font-size: 50px;" value="我丢">
                 </form>
                 <?php else: ?>
                 <?php 
@@ -56,9 +56,7 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 				        echo "成功：<a href='/'>返回</a>&nbsp;<a target='_blank' href='{$href}'>查看</a><br/>\n\n";
 				    } else {
 				        echo "<a href='/'>返回</a>&nbsp;发布失败<br/>\n\n";
-				        echo "<pre>";
-						var_dump($result);
-						echo "</pre>";
+				        echo "<p>",$result,"</p>";
 					}
                 ?>
                 <?php endif;?>
