@@ -58,6 +58,9 @@ if( !empty( $hitw ) && !empty( $_POST['content'] ) ){
 				        echo "成功：<a href='/'>返回</a>&nbsp;<a target='_blank' href='{$href}'>查看</a><br/>\n\n";
 				    } else {
 				        echo "<a href='/'>返回</a>&nbsp;发布失败<br/>\n\n";
+				        if( is_object($result) ) {
+					        var_dump($result);
+				        }
 				        echo "<p>",$result,"</p>";
 					}
                 ?>
